@@ -166,8 +166,7 @@ def menu():
                             clientes[clie1.get_id_cliente()]=clie1
                     case "2":
                         for i, j in clientes.items():
-                            print(j)
-            case "3":
+                            print(f'ID del cliente {i} \n Informacion del cliente: \n -Nombre cliente: {j.get_nombre()} \n -Email cliente: {j.get_email()} \n -Direccion cliente: {j.get_direccion()}')
                 print("Que quieres hacer")
                 print("1. Crear pedido")
                 print("2. Listar pedidos")
