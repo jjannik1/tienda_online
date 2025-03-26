@@ -92,11 +92,6 @@ Cierra la aplicación.
 3. **Añadir Reseña:**
    - En "Gestionar reseñas", el usuario puede añadir una reseña a un producto, proporcionando un comentario y una puntuación.
 
-## Consideraciones
-
-- Si intentas crear un producto, cliente o pedido con un ID que ya existe, el sistema mostrará un mensaje de error.
-- Asegúrate de introducir los datos correctamente, como el ID del producto, cliente o pedido, para evitar problemas de duplicados.
-
 ## Conclusión
 
 Este código permite gestionar productos, clientes, pedidos y reseñas de forma interactiva. Puedes agregar productos, crear pedidos y dejar reseñas sobre productos. El menú proporciona opciones sencillas para gestionar estos aspectos de manera eficiente.
