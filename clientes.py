@@ -1,16 +1,5 @@
 class Cliente:
     def __init__(self,id_cliente: str, nombre: str, email: str, direccion: str):
-        """_summary_
-
-        :param id_cliente: _description_
-        :type id_cliente: str
-        :param nombre: _description_
-        :type nombre: str
-        :param email: _description_
-        :type email: str
-        :param direccion: _description_
-        :type direccion: str
-        """
         self.__id_cliente = id_cliente
         self.__nombre = nombre
         self.__email = email
