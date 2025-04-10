@@ -8,66 +8,55 @@ from resenas import Resena
 productos = []
 clientes = {}
 pedidos = []
-pedidos_dicci = {}
-resenas = []
+reseñas = []
+
 #Producto
-print("Productos")
-prod1 = Producto("P001", "Disco", 120.25, 20)
-productos.append(prod1)
-prod1 = Producto("P002", "Portatil", 250.50, 8)
-productos.append(prod1)
+pro1 = Producto("P000", "0", 0.0, 0)
+productos.append(pro1)
 
-for i in productos:
-    print(i)
+pro1 = Producto("P001", "Disco", 120.25, 20)
+productos.append(pro1)
 
-print()
+pro1 = Producto("P002", "Portatil", 250.50, 8)
+productos.append(pro1)
+
+
 #Cliente
-print("Clientes")
+cli1 = Cliente("C000", "0", "0", "0")
+clientes[cli1.get_id_cliente()]=cli1
+
 cli1 = Cliente("C001", "Jose", "prueba@correo.com", "Adra")
 clientes[cli1.get_id_cliente()]=cli1
 
 cli1 = Cliente("C002", "Juan", "prueba3@correo.com", "Balanegra")
 clientes[cli1.get_id_cliente()]=cli1
 
-
-for clientes_id, cliente in clientes.items():
-    print(cliente)
-
-print()
-productos[1].set_stock(900)
-for i in productos:
-    print(i)
-
-print()
-prodi1 = ProductoDigital("PD001", "Libro", 13.50, 100, "Pdf", 10.8)
-
+#Producto digital
+prodi1 = ProductoDigital("P003", "juego" ,60.0 ,7,"juego" , 500.0)
 productos.append(prodi1)
 
-for i in productos:
-    print(i)
+#Pedido
+pedido = Pedido("PED000" , clientes["C000"] , "0")
+pedido.agregar_producto(productos[0])
+pedidos.append(pedido)
 
-print()
+pedido = Pedido("PED001" , clientes["C001"] , "14-02-2025")
+pedido.agregar_producto(productos[1])
+pedidos.append(pedido)
 
-pedido1 = Pedido("PE001", clientes["C001"], "14-02-2025")
+#Resaña
 
-print(pedido1)
+reseña = Resena("R000" , productos[0] , clientes["C000"] , "0" , 0)
+reseñas.append(reseña)
 
-print()
-pedido1.agregar_producto(productos[0])
-pedido1.agregar_producto(productos[1])
-print(pedido1)
-
-
-
-print()
-resena = Resena("R001", productos[0], clientes["C001"], "Esta chulo", 5)
-
-print(resena)
-
+#Menu
 
 def menu():
-    while True:
-        print("\n Menu")
+    
+    verdad = True # Varibla para manejar el bucle del menu
+
+    while verdad:
+        print("Menu")
         print()
         print("1. Gestionar productos")
         print("2. Gestionar clientes")
@@ -75,180 +64,378 @@ def menu():
         print("4. Gestionar reseñas")
         print("5. Salir")
         print()
-        opc = input("Elige una opcion: ")
-        match opc:
-            case "1":
-                print("Que quieres hacer")
-                print("1. Añadir producto")
-                print("2. Listar productos")
-                print("3. Actualizar stock")
-                print()
-                op1 = input("Introduce opcion: ")
-                match op1:
-                    case "1":
-                        print("Es Fisico (F) o Digital (D) el producto")
-                        op12 = input("Introduce F o D: ")
-                        match op12:
-                            case "F":
-                                prodf = ""
-                                idef = input("Introduce el ID del producto empezando con P###: ")
-                                nom = input("Introduce el nombre del producto: ")
-                                precio = float(input("Introduce el precio del producto: "))
-                                stock = int(input("Introduce el stock del producto: "))
-                                prodf = Producto(idef,nom,precio,stock)
-                                for i in productos:
-                                    if prodf.get_id_producto() != i.get_id_producto():
-                                        comprob = False
-                                    else:
-                                        comprob = True
+        opcion = input("Elige una opcion: ")
 
-                                if comprob:
-                                    print("No se puede crear el producto porque la id del producto ya existe")
-                                else:
-                                    productos.append(prodf)
+        #Print para ver el menu con un input para pedir la opcion
 
-                            case "D":
-                                prodd = ""
-                                ided = input("Introduce el ID del producto empezando con P###: ")
-                                nom = input("Introduce el nombre del producto: ")
-                                precio = float(input("Introduce el precio del producto: "))
-                                stock = int(input("Introduce el stock del producto: "))
-                                form = input("Introduce el formato: ")
-                                tamano = input("Introduce el tamaño: ")
-                                prodd = ProductoDigital(ided,nom,precio,stock,form,tamano)
-                                for i in productos:
-                                    if prodd.get_id_producto() != i.get_id_producto():
-                                        comprob = False
-                                    else:
-                                        comprob = True
+        if opcion == "1":
 
-                                if comprob:
-                                    print("No se puede crear el producto porque la id del producto ya existe")
-                                else:
-                                    productos.append(prodd)
-                            
-                            case _:
-                                print("No has elegido ninguna opcion valida")
+            #Menu productos
 
-                    case "2":
-                        for i in productos:
-                            print(i)
-                    case "3":
-                        buscar = input("Introduce el id del producto: ")
-                        for i in productos:
-                            if buscar == i.get_id_producto():
-                                stock = int(input("Introduce el stock nuevo del producto: "))
-                                i.set_stock(stock)
+            print("Que quieres hacer")
+            print("1. Añadir producto")
+            print("2. Listar productos")
+            print("3. Actualizar stock")
+            print()
+            opcion1 = input("Introduce opcion: ")
 
-            case "2":
-                print("Que quieres hacer")
-                print("1. Añadir cliente")
-                print("2. Listar clientes")
-                print()
-                op2 = input("Introduce opcion: ")
-                match op2:
-                    case "1":
-                        clie1 = ""
-                        idc = input("Introduce el id del cliente empezando C###: ")
-                        nom = input("Introduce nombre del cliente: ")
-                        corr = input("Introduce correo@ del cliente: ")
-                        ubi = input("Introduce la ubicacion del cliente: ")
-                        clie1 = Cliente(idc,nom,corr,ubi)
-                        for i in clientes.keys():
-                                    if idc != i:
-                                        comprob = False
-                                    else:
-                                        comprob = True
+            #Print para ver el menu con un input para pedir la opcion
 
-                        if comprob:
-                                    print("No se puede crear el cliente porque la id del cliente ya existe")
-                        else:
-                            clientes[clie1.get_id_cliente()]=clie1
-                    case "2":
-                        for i, j in clientes.items():
-                            print(f'ID del cliente {i} \n Informacion del cliente: \n -Nombre cliente: {j.get_nombre()} \n -Email cliente: {j.get_email()} \n -Direccion cliente: {j.get_direccion()}')
-                print("Que quieres hacer")
-                print("1. Crear pedido")
-                print("2. Listar pedidos")
-                print("3. Calcular total")
-                print("4. Agregar productos")
-                print()
-                op3 = input("Introduce opcion: ")
-                match op3:
-                    case "1":
-                        ped = ""
-                        idp = input("Introduce el id del producto empezando P###: ")
-                        clien = input("Introduce la id del cliente existente: ")
-                        fecha = input("Introduce la fecha: ")
-                        ped = Pedido(idp, clientes[clien], fecha)
+            if opcion1 == "1" :
 
-                        for i in pedidos:
-                                    if ped.get_id_pedido() != i.get_id_pedido():
-                                        comprob = False
-                                    else:
-                                        comprob = True
+                print("Es Fisico (F) o Digital (D) el producto")
+                opcion1_2 = input("Introduce F o D: ")
+                opcion1_2 = opcion1_2.lower()
 
-                        if comprob:
-                            print("No se puede crear el pedido porque la id del pedido ya existe")
-                        else:
-                            pedidos.append(ped)
-                    case "2":
-                        for i in pedidos:
-                            print(i)
-                    case "3":
-                        id_ped = input("Introduce la id del pedido: ")
+                #Pregunta para saber si es fisico o digital
+
+                if opcion1_2 == "f":
+
+                    productof = ""
+
+                    for i in productos :
+                        idef = i.get_id_productos()
+
+                    numero = int(idef[1:])
+                    
+                    numero = str(numero + 1)
+
+                    if len(numero) == 1 :
+                        idef = "P" + "0" +"0" + numero
+                    
+                    elif len(numero) == 2 :
+                        idef = "P" + "0"+ numero
+                    
+                    elif len(numero) == 3 :
+                        idef = "P" + numero
+
+                    #Generacion automatica del ID
+
+                    nom = input("Introduce el nombre del producto: ")
+                    precio = float(input("Introduce el precio del producto: "))
+                    stock = int(input("Introduce el stock del producto: "))
+
+                    productof = Producto(idef,nom,precio,stock) #Crea el objejo
+
+                    productos.append(productof) #Añade el producto a la lista de productos
+
+                    input("pulsa para continuar") #Pausa con limpiador de pantalla
+                
+                elif opcion1_2 == "d" :
+
+                    productod = ""
 
 
-                        for i in pedidos:
-                            if id_ped == i.get_id_pedido():
-                                valor = 0
-                                for j in i.get_productos():
-                                    valor = valor + j.get_precio()
+                    for i in productos :
+                        ided = i.get_id_productos()
 
-                        print(f' El valor del pedido es {valor}')
+                    numero = int(ided[1:])
+                    
+                    numero = str(numero + 1)
+
+                    if len(numero) == 1 :
+                        ided = "P" + "0" +"0" + numero
+                    
+                    elif len(numero) == 2 :
+                        ided = "P" + "0"+ numero
+                    
+                    elif len(numero) == 3 :
+                        ided = "P" + numero
+
+                    #Generacion automatica del ID
+
+                    nom = input("Introduce el nombre del producto: ")
+                    precio = float(input("Introduce el precio del producto: "))
+                    stock = int(input("Introduce el stock del producto: "))
+                    form = input("Introduce el formato: ")
+                    tamaño = input("Introduce el tamaño: ")
+
+                    productod = ProductoDigital(ided,nom,precio,stock,form,tamaño) #Crea el objejo
+                    productos.append(productod) #Añade el producto a la lista de productos
+                    
+                    input("pulsa para continuar") #Pausa con limpiador de pantalla
+                    
+                else : 
+                    print("Esa opcion no existe")
+
+            elif opcion1 == "2" :
+                #Lista los productos
+
+                for i in productos:
+                    print(i)
+
+                input("pulsa para continuar")  #Pausa con limpiador de pantalla
+
+            elif opcion1 == "3" :
+                #Cambia el stock de un producto
+                pregunta = input("Pon el id del producto que quieres cambiar su stock: ")
+
+                for i in productos :
+
+                    if pregunta == i.get_id_productos(): #Busca el producto que el usuario quiere
+                        stock = int(input("Introduce el stock que quieres poner: "))  #Le pide al usuario el nuevo stock
+                        i.set_stock(stock)      
+
+                input("pulsa para continuar") #Pausa con limpiador de pantalla
+
+            else : 
+                print("Esa opcion no esta ")
+
+        elif opcion == "2":
+
+            #Menu clientes
+
+            print("Que quieres hacer")
+            print("1. Añadir cliente")
+            print("2. Listar clientes")
+            print()
+            opcion2 = input("Introduce opcion: ")
+
+            #Print para ver el menu con un input para pedir la opcion
+
+            if opcion2 == "1" :               
+
+                for i in clientes.values() :
+                        idc = i.get_id_cliente()
+
+                numero = int(idc[1:])
+                    
+                numero = str(numero + 1)
+
+                if len(numero) == 1 :
+                    idc = "C" + "0" +"0" + numero
+                    
+                elif len(numero) == 2 :
+                    idc = "C" + "0"+ numero
+                    
+                elif len(numero) == 3 :
+                    idc = "C" + numero
+
+                #Generacion automatica del ID
+
+                nom = input("Introduce nombre del cliente: ")
+                corr = input("Introduce correo@ del cliente: ")
+                ubi = input("Introduce la ubicacion del cliente: ")
+
+                clie1 = Cliente(idc,nom,corr,ubi)
+                clientes[clie1.get_id_cliente()]=clie1
 
 
+                input("pulsa para continuar") #Pausa con limpiador de pantalla
+            
+            elif opcion2 == "2":
 
-                    case "4":
-                        id_pro = input("Introduce la id del producto: ")
-                        id_ped = input("Introduce la id del pedido: ")
+                for id , cliente in clientes.items():
+                    print(f' \n-Id del cliente : {id} \n\n-Informacion del cliente: \n -Nombre cliente: {cliente.get_nombre()} \n -Email: {cliente.get_email()} \n -Direccion: {cliente.get_direccion()}')
 
-                        for i in pedidos:
-                            if id_ped == i.get_id_pedido():
-                                comprob = False
-                                for j in productos:
-                                    if id_pro == j.get_id_producto():
-                                        i.agregar_producto(j)
-                                        break
-                                break
+                input("pulsa para continuar") #Pausa con limpiador de pantalla
+                
+
+            
+            else : 
+                print("Esa opcion no existe")
+
+        elif opcion == "3":
+
+            #Menu pedido
+
+            print("Que quieres hacer")
+            print("1. Crear pedido")
+            print("2. Listar pedidos")
+            print("3. Calcular total")
+            print("4. Añadir producto")
+            print()
+            opcion3 = input("Introduce opcion: ")
+
+            #Print para ver el menu con un input para pedir la opcion
+
+
+            if opcion3 == "1" :
+
+                pedido = ""
+
+                for i in pedidos :
+                        id_pedido = i.get_id_pedido()
+
+                numero = int(id_pedido[3:])
+                    
+                numero = str(numero + 1)
+
+                if len(numero) == 1 :
+                    id_pedido = "PED" + "0" +"0" + numero
+                    
+                elif len(numero) == 2 :
+                    id_pedido = "PED" + "0"+ numero
+                    
+                elif len(numero) == 3 :
+                    id_pedido = "PED" + numero
+
+                #Generacion automatica del ID
+
+                cliente = input("Introduce el id del cliente: ")
+                fecha = input("Introduce la fecha: ")
+
+                pedido = Pedido(id_pedido , clientes[cliente] , fecha)
+                pedidos.append(pedido)
+
+                input("pulsa para continuar") #Pausa con limpiador de pantalla
+
+            elif opcion3 == "2" :
+
+                for i in pedidos : #Listar los pedidos
+                    print(i)
+                
+                input("pulsa para continuar") #Pausa con limpiador de pantalla
+
+            elif opcion3 == "3" :
+
+                #Calcular total
+
+                entra = False
+
+                id_pedido = input("Introduce el id del pedido PED###: ")
+
+                for i in pedidos:
+
+                    if id_pedido == i.get_id_pedido():
+                       entra = True
+                       valor_total = 0
+                       for j in i.get_productos():
+                            if j == "" :
+
+                                pass
+                            else :
+                                valor_total = valor_total + j.get_precio()
+
+                #Hace comprobaciones para ver si ese id del pedido existe y luego va comprando si tiene productos si tienes los va sumando al total el total empieza en cero
+                
+                if entra :
+                    print (f'El valor total del pedido es {valor_total}')
+                
+                else :
+                    print("Ese id de pedido no existe pruebe otra vez")
+
+                input("pulsa para continuar") #Pausa con limpiador de pantalla
+
+            elif opcion3 == "4" :
+
+                id_producto = input("Introduce el id del producto que vas a añadir (P###)")
+                id_pedido = input("Introduce el id del pedido (PED###): ")
+
+                comprobacion = True
+                comprobacion1 = True
+                comprobacion2 =  False
+
+                #Variables de comprobacion incializadas
+
+                for i in pedidos:
+                    if id_pedido == i.get_id_pedido():
+
+                        comprobacion = False
+
+                        for j in productos :
+                            if id_producto == j.get_id_productos() :
+
+                                comprobacion1 = False
                                 
+                                for h in i.get_productos():
+                                    if h.get_id_producto == id_producto :
 
-                            else:
-                                comprob = True
+                                        comprobacion2 = True
+                            
+                                if comprobacion2 :
+                                    print("No se puede añadir ese producto porque ya lo tienes en el pedido")
+                                else :
+                                    i.agregar_producto(j)
 
-                        if comprob:
-                            print("Ese id no existe")     
-            case "4":
-                print("Que quieres hacer")
-                print("1. Añadir reseña")
-                print("2. Listar reseñas")
-                print()
-                op4 = input("Introduce la opcion: ")
-                match op4:
-                    case "1":
-                        idr = input("Introduce la id de la reseña (R###): ")
-                        idp = input("Introduce la id del producto: ")
-                        idc = input("Introduce la id del cliente: ")
-                        coment = input("Introduce un comentario: ")
-                        puntua = int(input("Introduce la puntuacion del producto: "))
-                    case "2":
-                        for i in resenas:
-                            print(i)
-            case "5":
-                break
-            case _:
-                print("Esa opcion no existe.")
-        
-        
+                        if comprobacion1:
+                            print("Ese id de producto no existe")
+
+                if comprobacion:
+                    print("Ese id de pedido no existe")
+
+                #Comprobacion para en caso de que el id de pedido dado no exista te imprima que no existe si existe al cambiar el valor a False y no entra
+                #Comprobacion1 para en caso de que el id de producto dado no exista te imprima que no existe si existe al cambiar el valor a False y no entra
+                #Comprobacion2 comprueba en el pedido dado que no exista ese producto si existe te dice que ya esta si no esta lo añade
+                
+                input("pulsa para continuar") #Pausa con limpiador de pantalla
+
+            else :
+                print("Esa opcion no existe")
+
+               
+            
+        elif opcion == "4":
+
+            #Menu Reseñas
+
+            print("Que quieres hacer")
+            print("1. Añadir reseña")
+            print("2. Listar reseñas")
+            print()
+            opcion4 = input("Introduce opcion: ")
+
+            #Print para ver el menu con un input para pedir la opcion
+
+            if opcion4 == "1":
+
+                #Crea la reseñas
+                
+                reseña = ""
+
+                for i in reseñas :
+                        id_reseña = i.get_id_reseña()
+
+                numero = int(id_reseña[3:])
+                    
+                numero = str(numero + 1)
+
+                if len(numero) == 1 :
+                    id_reseña = "R" + "0" +"0" + numero
+                    
+                elif len(numero) == 2 :
+                    id_reseña = "R" + "0"+ numero
+                    
+                elif len(numero) == 3 :
+                    id_reseña = "R" + numero
+
+                #Generacion automatica del ID
+
+                id_producto = input("Introduce el id del producto: ")
+                id_cliente = input("Introduce el id del cliente: ")
+                comentario = input("Introduce el comentario: ")
+                puntacion = input("Introduce la puntuacion ")
+
+                producto = ""
+
+                comprobacion3 = False
+
+                for i in productos : #Busca el producto
+                    if id_producto == i.get_id_productos() : 
+                        producto = i
+
+                for j in clientes.keys() : #Comprueba el cliente
+                    if j == id_cliente:
+                        comprobacion3 = True
+                
+                if producto != "" and comprobacion3 :  #Comprueba que el cliente y el producto estan        
+                    reseña = Resena(id_reseña , producto , clientes[id_cliente] , comentario , puntacion) #Crea el objeto
+                    reseñas.append(reseña)  #Añade la reseña a la lista resñas
+
+            elif opcion4 == "2":
+
+                #Lista las reseñas
+
+                for i in reseñas:   #Recore la lista e mostrandola por pantaña
+                    print(i)
+
+            else : 
+                print("Esa opcion no existe")
+
+        elif opcion == "5":
+            verdad =False
+
+        else :
+            print("Esa opcion no esta en el menu")  
 
 menu()
