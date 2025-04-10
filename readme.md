@@ -1,97 +1,118 @@
-# Manual de Uso del Código
+# Manual de Usuario
+## IES Abdera de Adra (Almería)
+### CFGS Desarrollo de Aplicaciones Web (DAW)
+#### Curso 2024-2025
 
-Este código es parte de una aplicación que gestiona productos, clientes, pedidos y reseñas. A continuación, se explica cómo funciona cada parte del código y cómo puedes interactuar con él.
+---
 
-## Descripción General
+## 1. Introducción
+Bienvenido al sistema de gestión de productos, clientes, pedidos y reseñas.  
+Este software permite crear y administrar pedidos, añadir productos (físicos y digitales), gestionar clientes y recibir valoraciones de productos.
 
-El código consta de varias clases que gestionan los productos, clientes, pedidos y reseñas. Además, proporciona un menú interactivo donde el usuario puede realizar diferentes acciones como agregar productos, clientes, realizar pedidos y añadir reseñas.
+**Objetivo:** Facilitar la gestión de una tienda virtual desde consola.  
+**Dirigido a:** Estudiantes, desarrolladores y pequeños negocios que deseen practicar o utilizar un sistema básico de e-commerce local.
 
-## Clases Principales
+---
 
-### Producto
+## 2. Instalación
 
-La clase `Producto` representa un producto físico. Cada producto tiene un ID, un nombre, un precio y un stock.
+**Requisitos previos:**
+- Python 3.10 o superior  
+- Terminal o consola de comandos  
+- Editor de texto (VSCode, Sublime, etc.)   
 
-#### Funcionalidades:
-- Añadir un producto a la lista de productos.
-- Listar todos los productos disponibles.
-- Actualizar el stock de un producto.
+**Instalación Paso a Paso:**
+1. Clonar el repositorio desde GitHub:
+   ```bash
+   git clone https://github.com/jjannik1/tienda_online.git
+   ```
 
-### Cliente
+2. Acceder al directorio del proyecto:
+```cd proyecto-tienda
+```
 
-La clase `Cliente` representa un cliente. Cada cliente tiene un ID, un nombre, un correo electrónico y una dirección.
+3. Ejecutar el programa:
+```python main.py
+```
 
-#### Funcionalidades:
-- Crear nuevos clientes.
-- Listar todos los clientes registrados.
+4. Tambien se puede descargar en un zip el codigo desde la pagina: https://github.com/jjannik1/tienda_online.git
 
-### Producto Digital
+## 3. Inicio de Sesión y Registro
 
-La clase `ProductoDigital` hereda de `Producto` y representa productos digitales (como libros o software). Además de las propiedades de un producto físico, tiene un formato (PDF, EPUB, etc.) y un tamaño.
+Este sistema no incluye autenticación mediante usuarios y contraseñas.  
+Todas las operaciones se realizan directamente desde un menú interactivo en consola.
 
-#### Funcionalidades:
-- Crear productos digitales.
-- Listar productos digitales.
+---
 
-### Pedido
+## 4. Funcionalidades del Software
 
-La clase `Pedido` representa un pedido realizado por un cliente. Un pedido tiene un ID, un cliente asociado, una fecha de realización y una lista de productos.
+### 4.1 Gestión de Productos
 
-#### Funcionalidades:
-- Crear un nuevo pedido.
-- Listar pedidos.
-- Calcular el total de un pedido.
-- Agregar productos a un pedido.
+- Añadir producto (físico o digital)
+- Listar productos
+- Actualizar stock
 
-### Reseña
+### 4.2 Gestión de Clientes
 
-La clase `Resena` permite a un cliente dejar una reseña sobre un producto. Cada reseña tiene un ID, un producto asociado, un cliente, un comentario y una puntuación.
+- Añadir cliente
+- Listar clientes
 
-#### Funcionalidades:
-- Añadir una reseña a un producto.
-- Listar todas las reseñas.
+### 4.3 Gestión de Pedidos
 
-## Interacción con el Menú
+- Crear pedido
+- Agregar productos a un pedido
+- Calcular total de un pedido
+- Listar pedidos
 
-El código proporciona un menú interactivo con las siguientes opciones:
+### 4.4 Gestión de Reseñas
 
-### 1. Gestionar Productos
-Permite gestionar productos físicos y digitales:
-- **Añadir Producto**: Crea un nuevo producto, ya sea físico o digital.
-- **Listar Productos**: Muestra todos los productos disponibles.
-- **Actualizar Stock**: Actualiza el stock de un producto existente.
+- Añadir reseña
+- Listar reseñas
 
-### 2. Gestionar Clientes
-Permite gestionar clientes:
-- **Añadir Cliente**: Crea un nuevo cliente.
-- **Listar Clientes**: Muestra todos los clientes registrados.
+---
 
-### 3. Gestionar Pedidos
-Permite gestionar pedidos:
-- **Crear Pedido**: Crea un nuevo pedido para un cliente.
-- **Listar Pedidos**: Muestra todos los pedidos realizados.
-- **Calcular Total**: Muestra el valor total de un pedido.
-- **Agregar Productos**: Añade productos a un pedido.
+## 5. Configuración y Personalización
 
-### 4. Gestionar Reseñas
-Permite gestionar reseñas sobre productos:
-- **Añadir Reseña**: Deja una reseña sobre un producto.
-- **Listar Reseñas**: Muestra todas las reseñas de productos.
+- Personalización del código para nuevos tipos de productos
+- Inclusión opcional de almacenamiento en archivos o bases de datos
+- Añadir validaciones
 
-### 5. Salir
-Cierra la aplicación.
+---
 
-## Ejemplo de Uso
+## 6. Preguntas Frecuentes (FAQ)
 
-1. **Agregar Producto:**
-   - El usuario puede elegir la opción de "Gestionar productos" y seleccionar "Añadir producto". Luego, se le pedirá que indique si el producto es físico o digital y se le solicitarán los detalles del producto (ID, nombre, precio, stock, etc.).
+**¿Cómo se guarda la información?**  
+Los datos se almacenan en memoria. Se pierden al cerrar la aplicación.
 
-2. **Crear Pedido:**
-   - En "Gestionar pedidos", el usuario puede elegir "Crear pedido", seleccionar un cliente existente y añadir productos al pedido. Después puede listar todos los pedidos creados.
+**¿Qué ocurre si introduzco un ID duplicado?**  
+El programa gestiona la validación de duplicados de forma automática.
 
-3. **Añadir Reseña:**
-   - En "Gestionar reseñas", el usuario puede añadir una reseña a un producto, proporcionando un comentario y una puntuación.
+**¿Se puede ejecutar desde otro entorno?**  
+Sí, cualquier entorno con Python instalado es compatible.
 
-## Conclusión
+---
 
-Este código permite gestionar productos, clientes, pedidos y reseñas de forma interactiva. Puedes agregar productos, crear pedidos y dejar reseñas sobre productos. El menú proporciona opciones sencillas para gestionar estos aspectos de manera eficiente.
+## 7. Contacto y Soporte
+
+- Correo: `jjen527@g.educaand.es`  
+- Teléfono: `625 74 18 04`
+
+---
+
+## 8. Créditos y Licencia
+
+- Desarrollado por alumnos del CFGS DAW - IES Abdera  
+- Licencia: MIT
+
+---
+Copyright (c) [2025] [jjannik1]
+
+Se concede permiso, de forma gratuita, a cualquier persona que obtenga una copia
+de este software y los archivos de documentación asociados (el "Software"), para tratar el
+Software sin restricción, incluyendo sin limitación los derechos a usar, copiar, modificar,
+fusionar, publicar, distribuir, sublicenciar y/o vender copias del Software, y a permitir a las
+personas a las que se les proporcione el Software a hacer lo mismo, sujeto a las siguientes condiciones:
+
+El aviso de copyright y esta nota de permiso deberán incluirse en todas las copias o partes sustanciales del Software.
+
+EL SOFTWARE SE PROPORCIONA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO EXPRESA O IMPLÍCITA, INCLUYENDO PERO NO LIMITADO A LAS GARANTÍAS DE COMERCIABILIDAD, IDONEIDAD PARA UN PROPÓSITO PARTICULAR Y NO INFRACCIÓN. EN NINGÚN CASO LOS AUTORES O TITULARES DEL COPYRIGHT SERÁN RESPONSABLES POR NINGUNA RECLAMACIÓN, DAÑO U OTRA RESPONSABILIDAD, YA SEA EN UNA ACCIÓN DE CONTRATO, AGRAVIO O DE OTRO MODO, QUE SURJA DE O EN CONEXIÓN CON EL SOFTWARE O EL USO U OTRO TIPO DE ACCIONES EN EL SOFTWARE.
