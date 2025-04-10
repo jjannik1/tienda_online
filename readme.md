@@ -29,12 +29,12 @@ Este software permite crear y administrar pedidos, añadir productos (físicos y
 
 2. Acceder al directorio del proyecto:
 ```bash
-cd proyecto-tienda
+   cd proyecto-tienda
 ```
 
 3. Ejecutar el programa:
 ```bash
-python main.py
+   python main.py
 ```
 
 4. Tambien se puede descargar en un zip el codigo desde la pagina: https://github.com/jjannik1/tienda_online.git
